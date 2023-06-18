@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+/************************************************************
+
+    Following is the linked list node structure.
+    
+    template <typename T>
+    class Node {
+        public:
+        T data;
+        Node* next;
+
+        Node(T data) {
+            next = NULL;
+            this->data = data;
+        }
+
+        ~Node() {
+            if (next != NULL) {
+                delete next;
+            }
+        }
+    };
+
+************************************************************/
+
+// Node<int> *sortTwoLists(Node<int> *first, Node<int> *second) {
+//   // Write your code here.
+// }
+#include <bits/stdc++.h>
+
+/************************************************************
+
+   Following is the linked list node structure.        template <typename T>    class Node {        public:        T data;        Node* next;
+
+       Node(T data) {            next = NULL;            this->data = data;        }
+
+       ~Node() {            if (next != NULL) {                delete next;            }        }    };
+
+************************************************************/
+
+ void  insertattail(Node<int>* &tail , Node<int>* insert){      if(tail ==NULL){          return ;      }      tail-> next = insert ;        tail = insert ;
+
+ }
+
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second) {    Node<int>* head1= first ;     Node<int> * head2 = second ;
+
+    Node<int>* dummy = new Node<int>(-1);     Node<int>* head = dummy;     Node<int>*tail = dummy ;
+
+    while(head1!= NULL && head2!= NULL){         if(head1-> data < head2-> data){             insertattail(  tail ,head1);             head1 = head1-> next ;         }else{             insertattail(tail ,head2);             head2 = head2->next;         }     }     while(head1!=NULL){         insertattail(tail ,head1);         head1= head1->next;     }      while(head2!=NULL){         insertattail(tail,head2);         head2= head2->next;     }
+
+    return head->next ; }
