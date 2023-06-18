@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+bool myCmp(pair<int, int> a, pair<int, int> b){
+    return  (a.second < b.second); //sorting in increasing order4
+}
+int maximumActivities(vector<int> &start, vector<int> &finish) {
+    // Write your code here.
+    int n = start.size();
+    pair<int, int> vec[n];
+    for (int i  = 0 ; i < n; i++){
+        vec[i].first = start[i];
+        vec[i].second = finish[i];
+    }
+    sort(vec, vec + n, myCmp);
+    int prev  = 0;
+    int res = 1;
+    
+    for (int curr = 1 ; curr < n; curr++){
+        if(vec[curr].first >= vec[prev].second){
+            res++;
+            prev = curr;
+        }
+    }
+    return res;
+}
