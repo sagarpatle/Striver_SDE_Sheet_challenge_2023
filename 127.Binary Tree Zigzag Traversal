@@ -1,0 +1,39 @@
+#include <bits/stdc++.h> 
+vector<int> zigZagTraversal(BinaryTreeNode<int> *root)
+{
+    // Using DeQueue: BFS
+    vector<int> ans;
+    if(root == NULL) return ans;
+    deque<BinaryTreeNode<int>*> dq;
+    dq.push_front(root);
+    bool flag = true;
+    while(!dq.empty()){
+        int n = dq.size();
+        for(int i = 0; i < n; i++){
+            BinaryTreeNode<int> *curr;
+            if(flag){
+                curr = dq.front();
+                dq.pop_front();
+            }
+            else{
+                curr = dq.back();
+                dq.pop_back();
+            }
+            ans.push_back(curr->data);
+            if(flag){
+                if(curr->left != NULL)
+                    dq.push_back(curr->left);
+                if(curr->right != NULL)
+                    dq.push_back(curr->right);
+            }
+            else{
+                if(curr->right != NULL)
+                    dq.push_front(curr->right);
+                if(curr->left != NULL)
+                    dq.push_front(curr->left);
+            }
+        }
+        flag = !flag;
+    }
+    return ans;
+}
