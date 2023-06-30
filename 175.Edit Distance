@@ -1,0 +1,58 @@
+int editDistance(string s1, string s2)
+{
+    //write you code here
+    int n = s1.size();
+
+    int m = s2.size();
+
+    vector<int> dp(m+1, 0);
+
+ 
+
+    for(int j=0; j<=m; j++) dp[j] = j;
+
+ 
+
+    for(int i=1; i<=n; i++)
+
+    {
+
+        
+
+        int diag = dp[0];
+
+        dp[0] = i;
+
+        for(int j=1; j<=m; j++)
+
+        {
+
+            int temp;
+
+            if (s1[i - 1] == s2[j - 1]) {
+
+              temp = dp[j];
+
+              dp[j] = diag;
+
+            }
+            else {
+
+              int insert = 1 + dp[j - 1];
+
+              int del = 1 + dp[j];
+
+              int replace = 1 + diag;
+
+                temp = dp[j];
+
+              dp[j] = min(insert, min(del, replace));
+
+            }
+            diag = temp;
+
+        }
+
+    }
+    return dp[m];
+}
