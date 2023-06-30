@@ -1,0 +1,41 @@
+#include <bits/stdc++.h> 
+pair<int,int> predecessorSuccessor(BinaryTreeNode<int>* root, int key)
+{
+    // Iterative Approach
+    // Time Complexity: O(N)
+    // Space Complexity: O(1)
+    int pred = -1;
+    int succ = -1;
+    BinaryTreeNode<int>* curr = root;
+    while(curr != NULL){
+        if(curr->data == key) break;
+        else if(curr->data > key){
+            succ = curr->data;
+            curr = curr->left;
+        }
+        else{
+            pred = curr->data;
+            curr = curr->right;
+        }
+    }
+    // Predecessor
+    if(curr != NULL){
+        BinaryTreeNode<int>* adv = curr->left;
+        while(adv != NULL){
+            pred = adv->data;
+            adv = adv->right;
+        }
+    }
+
+     // Successor
+    if(curr != NULL){
+        BinaryTreeNode<int>* adv = curr->right;
+        while(adv != NULL){
+            succ = adv->data;
+            adv = adv->left;
+        }
+    }   
+
+    pair<int, int> p = make_pair(pred, succ);
+    return p;
+}
