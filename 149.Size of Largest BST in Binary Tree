@@ -1,0 +1,129 @@
+#include <bits/stdc++.h> 
+
+/************************************************************
+
+ 
+
+    Following is the Binary Tree node structure
+
+    
+
+    template <typename T>
+
+    class TreeNode {
+
+        public :
+
+        T data;
+
+        TreeNode<T> *left;
+
+        TreeNode<T> *right;
+
+ 
+
+        TreeNode(T data) {
+
+            this -> data = data;
+
+            left = NULL;
+
+            right = NULL;
+
+        }
+
+ 
+
+        ~TreeNode() {
+
+            if(left)
+
+                delete left;
+
+            if(right)
+
+                delete right;
+
+        }
+
+    };
+
+ 
+
+************************************************************/
+
+void func(TreeNode<int>* root,int &size,int &max_num, int &min_num){
+
+    if(root == NULL){
+
+        size = 0;
+
+        max_num = -100000;
+
+        min_num = 100000;
+
+        return;
+
+    }
+
+    if(root->left == NULL&&root->right == NULL){
+
+        size = 1;
+
+        max_num = root->data;
+
+        min_num = root->data;
+
+        return;
+
+    }
+
+    int size1,max_num1,min_num1,size2,max_num2,min_num2;
+
+    func(root->left,size1,max_num1,min_num1);
+
+    func(root->right,size2,max_num2,min_num2);
+
+    
+
+    if(root->data>max_num1&&root->data<min_num2){
+
+        size = 1 + size1 + size2;
+
+        max_num = max(root->data,max_num2);
+
+        min_num = min(root->data,min_num1);
+
+        return;
+
+    }
+
+    else{
+
+        size = max(size1,size2);
+
+        max_num = 100000;
+
+        min_num = -100000;
+
+        return;
+
+    }
+
+}
+
+int largestBST(TreeNode<int>* root) 
+
+{
+
+    if(root == NULL)return -1;
+
+    int size = 0;
+
+    int max_num,min_num;
+
+    func(root,size,max_num,min_num);
+
+    return size;
+
+}
