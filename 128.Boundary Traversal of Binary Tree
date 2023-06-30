@@ -1,0 +1,114 @@
+#include <bits/stdc++.h> 
+void helper1(TreeNode<int>* root,vector<int> &ans){//left 
+
+    if(root==NULL){
+
+        return ;
+
+    }
+
+    if(root->left || root->right){
+
+        ans.push_back(root->data);
+
+    }
+
+    helper1(root->left,ans);
+
+    if(!root->left){
+
+        helper1(root->right,ans);
+
+    }
+
+}
+
+void helper2(TreeNode<int>* root,vector<int> &ans){//right
+
+    if(root==NULL){
+
+        return ;
+
+    }
+
+    if(root->left || root->right){
+
+        ans.push_back(root->data);
+
+    }
+
+    helper2(root->right,ans);
+
+    if(!root->right){
+
+        helper2(root->left,ans);
+
+    }
+
+}
+
+void helper3(TreeNode<int>* root,vector<int> &ans){//leaf
+
+    if(root==NULL){
+
+        return;
+
+    }
+
+    if(!root->left && !root->right){
+
+        ans.push_back(root->data);
+
+    }
+
+    helper3(root->left,ans);
+
+    helper3(root->right,ans);
+
+}
+
+vector<int> traverseBoundary(TreeNode<int>* root){
+
+    vector<int> ans1;
+
+    vector<int> ans2;
+
+    vector<int> ans3;
+
+    helper1(root->left,ans1);
+
+    helper2(root->right,ans2);
+
+    helper3(root,ans3);
+
+ 
+
+    vector<int> ans;
+
+    if (root->left || root->right) {
+
+        ans.push_back(root->data);
+
+    }
+
+    for(int i=0;i<ans1.size();i++){
+
+        ans.push_back(ans1[i]);
+
+    }
+
+    for(int i=0;i<ans3.size();i++){
+
+        ans.push_back(ans3[i]);
+
+    }
+
+    for(int i=ans2.size()-1;i>=0;i--){
+
+        ans.push_back(ans2[i]);
+
+    }
+
+    return ans;
+
+}
