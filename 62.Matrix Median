@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+ 
+
+int getMedian(vector<vector<int>> &matrix)
+
+{
+
+priority_queue<int,vector<int>,greater<int>> pq;
+
+ 
+
+int totalSize = matrix.size() * matrix[0].size();
+
+int k = 0;
+
+if(totalSize % 2 == 0){
+
+k = totalSize/2;
+
+}else{
+
+k = totalSize/2 + 1;
+
+}
+
+ 
+
+for(int i=0 ; i < matrix.size(); i++){
+
+for(int j=0 ; j < matrix[0].size(); j++){
+
+pq.push(matrix[i][j]);
+
+if(pq.size() > k) pq.pop();
+
+}
+
+}
+
+ 
+
+return pq.top();
+
+ 
+
+}
